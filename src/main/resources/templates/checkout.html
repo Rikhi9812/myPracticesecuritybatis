@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="jp" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>チェックアウト画面</title>
+    <link rel="stylesheet"  type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+
+</head>
+<body>
+
+    <div class="header">
+        <div>
+          <h1>チェックアウト画面</h1>
+        </div>
+  
+        <div>
+  
+            <ul>
+                <li><a th:href="@{/}" href="#">ホームページ</a></li>
+                <li><a th:href="@{/shop}" href="#">ショッピング</a></li>
+                <li><a sec:authorize="isAnonymous()" th:href="@{/login}" href="#">ログイン</a></li>
+                <li><a sec:authorize="isAuthenticated()" th:href="@{/loginout}" href="#">ログアウト</a></li>
+                <li><a th:href="@{/cart}" href="#">カート</a></li>
+                <li><span th:text="${cartCount}">0</span></li>
+              </ul>
+        </div>
+  
+  
+      </div>
+
+
+      <div class="mainPage">
+        <h1>チェックアウト</h1>
+
+
+      </div>
+
+      
+
+
+      <div class="leftbox">
+        <p>合計: <span th:text="${total}"></span></p>
+        <a href="" th:href="@{/pay}">支払い</a>
+      </div>
+    
+</body>
+</html>

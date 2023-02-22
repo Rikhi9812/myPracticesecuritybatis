@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="jp" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>カテゴリー編集画面</title>
+    <link rel="stylesheet"  type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+
+</head>
+<body>
+
+    <div class="header">
+        <div>
+          <h1>カテゴリー編集画面</h1>
+        </div>
+  
+        <div>
+  
+          <ul>
+            <li><a th:href="@{/admin}" href="#">管理</a></li>
+            <li><a sec:authorize="isAuthenticated()"  th:href="@{/loginout}" href="#">ログアウト</a></li>
+        <li><a href="#" th:href="@{/admin/role}">役割</a></li>
+            
+          </ul>
+        </div>
+  
+  
+      </div>
+
+
+      <div class="mainPage">
+        <h1>カテゴリー編集</h1>
+      </div>
+
+      <div class="form">
+
+        
+
+
+        <form th:action="@{/admin/categories/update}" method="post" th:object="${category}">
+          <input type="hidden" name="id" th:field="*{id}">
+          <input type="text" required name="name" id="name" th:field="*{name}">
+          <input type="submit" value="編集">
+      </form>
+        
+
+
+        
+      </div>
+    
+</body>
+</html>

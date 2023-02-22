@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="jp" xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>カート表示画面</title>
+  <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+
+  <div class="header">
+    <div>
+      <h1>カート表示画面</h1>
+    </div>
+
+    <div>
+
+      <ul>
+        <li><a th:href="@{/}" href="#">ホームページ</a></li>
+        <li><a th:href="@{/shop}" href="#">ショッピング</a></li>
+        <li><a sec:authorize="isAnonymous()" th:href="@{/login}" href="#">ログイン</a></li>
+        <li><a sec:authorize="isAuthenticated()" th:href="@{/loginout}" href="#">ログアウト</a></li>
+        <li><a th:href="@{/cart}" href="#">カート</a></li>
+        <li><span th:text="${cartCount}">0</span></li>
+      </ul>
+    </div>
+
+
+  </div>
+
+
+  <div class="mainPage">
+    <h1>カート表示</h1>
+  </div>
+
+  <div class="sidebyside">
+
+
+
+    <div class="sideleft">
+      <h5>カート (<span th:text="${cartCount}"></span>)</h5>
+
+      <div th:each="cart, iStat : ${carts}" class="leftbox">
+
+        <td><img alt="" height="150px" width="150px" th:src="*{'data:image/jpeg;base64,'+{cart.imgName}}"></td>
+
+        <!-- <img src="" alt="${cart.imgName}" th:src="@{${'/productImages/' + cart.imgName}}" height="150px" width="150px" > -->
+        <h2 th:text="${cart.name}">name</h2>
+        <p th:text="${cart.weight}">weight</p>
+        <p>Yen<span th:text="${cart.price}">price</span></p><br>
+        <a class="deleter" href="" th:href="@{/cart/removeItem/{index}(index=${iStat.index})}">削除 アイテム</a>
+      </div>
+    </div>
+
+
+
+
+    <div class="rightbox">
+
+
+      <p>合計: <span th:text="${total}"></span></p>
+      <a href="" th:href="@{/checkout}">チェックアウト</a>
+    </div>
+  </div>
+
+</body>
+
+</html>

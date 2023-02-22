@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="jp" xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>商品管理画面</title>
+  <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+
+  <div class="header">
+    <div>
+      <h1>商品管理画面</h1>
+    </div>
+
+    <div>
+
+      <ul>
+        <li><a th:href="@{/admin}" href="#">管理</a></li>
+        <li><a sec:authorize="isAuthenticated()" th:href="@{/loginout}" href="#">ログアウト</a></li>
+        <li><a href="#" th:href="@{/admin/role}">役割</a></li>
+
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="mainPage">
+    <h1>商品表示</h1>
+  </div>
+
+  <div class="table">
+
+    <div>
+      <a th:href="@{/admin/products/add}" href="#">商品登録</a>
+    </div>
+
+
+    <table>
+      <thead>
+        <tr>
+          <th>SN</th>
+          <th>商品名前</th>
+          <th>カテゴリー</th>
+          <th>商品画像</th>
+          <th>削除</th>
+          <th>編集</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="product, iStat : ${products}">
+          <td th:text="${iStat.index + 1}"></td>
+          <td th:text="${product.name}"></td>
+          <td th:text="${product.category.name}"></td>
+          <td><img alt="" height="100px" width="100px" th:src="*{'data:image/jpeg;base64,'+{product.imgName}}"></td>
+          
+          <!-- <td><img src="" height="100px" width="100px" th:src="@{${'/productImages/' + product.imgName}}" alt=""></td> -->
+          <td><a class="delete" th:href="@{/admin/product/delete/{id}(id=${product.id})}" href="">削除</a></td>
+          <td><a th:href="@{/admin/product/update/{id}(id=${product.id})}" href="">編集</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+
+  </div>
+
+</body>
+
+</html>

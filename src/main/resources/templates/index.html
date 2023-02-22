@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="jp" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+
+    <title>ホームページ</title>
+  </head>
+  <body>
+    <div class="header">
+      <div>
+        <h1>ホームページ</h1>
+      </div>
+
+      
+      
+      <div>
+        
+        <ul>
+          <li><a th:href="@{/}" href="#">ホームページ</a></li>
+          <li><a th:href="@{/shop}" href="#">ショッピング</a></li>
+          <li><a sec:authorize="isAnonymous()" th:href="@{/login}" href="#">ログイン</a></li>
+          <li><a sec:authorize="isAuthenticated()" th:href="@{/loginout}" href="#">ログアウト</a></li>
+          <li><a th:href="@{/cart}" href="#">カート</a></li>
+          <li><span th:text="${cartCount}">0</span></li>
+        </ul>
+      </div>
+      </div>
+      
+      
+      <div class="mainPage" sec:authorize="hasAnyAuthority('ADMIN')">
+        <p>使用者は管理</p>
+      </div>
+      
+      <div class="mainPage" sec:authorize="hasAnyAuthority('USER')">
+        <p>使用者はユーザー</p>
+      </div>
+      
+      
+      <div class="mainPage" sec:authorize="isAuthenticated()">
+        
+        <span sec:authentication="name">Username</span><br><hr>
+        <span sec:authentication="principal.authorities">Roles</span>
+      </div>
+
+    </div>
+  </body>
+</html>

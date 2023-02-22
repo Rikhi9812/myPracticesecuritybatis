@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="jp" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+
+    <title>ショッピング画面</title>
+  </head>
+  <body>
+    <div class="header">
+      <div>
+        <h1>ショッピング画面</h1>
+      </div>
+
+      <div>
+
+        <ul>
+            <li><a th:href="@{/}" href="#">ホームベージ</a></li>
+            <li><a th:href="@{/shop}" href="#">ショッピング</a></li>
+            <li><a sec:authorize="isAnonymous()" th:href="@{/login}" href="#">ログイン</a></li>
+            <li><a sec:authorize="isAuthenticated()" th:href="@{/loginout}" href="#">ログアウト</a></li>
+            <li><a th:href="@{/cart}" href="#">カート</a></li>
+            <li><span th:text="${cartCount}">0</span></li>
+          </ul>
+      </div>
+
+
+
+
+    </div>
+
+    <div class="sidebyside">
+        <div class="left">
+            <h1>カテゴリー</h1>
+            <a class="lefta" th:href="@{/shop}" href="#">全カテゴリー</a>
+            <ul>
+                <a href="" th:each="category, isStat : ${categories}" 
+                th:href="@{/shop/category/{id}(id = ${category.id})}">
+                    <li th:text="${category.name}">test</li>
+                </a>
+
+
+            </ul>
+        </div>
+        <div class="right">
+        <div th:each="product : ${products}" class="right1">
+            <!-- <img src="" th:src="@{${'/productImages/' + product.imgName}}" alt="" th:alt="${product.name}" height="100px" width="100px"> -->
+
+            <img alt="" height="100px" width="100px" th:src="*{'data:image/jpeg;base64,'+{product.imgName}}">
+
+            <h5 th:text="${product.name}">chochol</h5>
+            <h4 th:text="${product.price}">100</h4>
+            <p th:text="${product.description}">test</p>
+            <a href="" th:href="@{/shop/viewproduct/{id}(id=${product.id})}">商品表示画面</a>
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

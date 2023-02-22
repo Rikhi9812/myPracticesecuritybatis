@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="jp"
+ xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登録商品表示画面</title>
+    <link rel="stylesheet"  type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+
+</head>
+<body>
+
+    <div class="header">
+        <div>
+          <h1>登録商品表示画面</h1>
+        </div>
+  
+        <div>
+  
+            <ul>
+                <li><a th:href="@{/}" href="#">ホームベージ</a></li>
+                <li><a th:href="@{/shop}" href="#">ショッピング</a></li>
+                <li><a sec:authorize="isAnonymous()" th:href="@{/login}" href="#">ログイン</a></li>
+                <li><a sec:authorize="isAuthenticated()" th:href="@{/loginout}" href="#">ログアウト</a></li>
+                <li><a th:href="@{/cart}" href="#">カート</a></li>
+                <li><span th:text="${cartCount}">0</span></li>
+              </ul>
+        </div>
+  
+  
+      </div>
+
+
+      <div class="mainPage">
+        <h1>登録商品</h1>
+      </div>
+
+      <div class="box">
+        <div class="box1">
+        
+          <td><img alt="" height="250px" width="250px" th:src="${'data:image/jpeg;base64,'+{product.imgName}}"></td>
+
+        <!-- <img src="" th:src="@{${'/productImages/' + product.imgName}}" alt="" th:alt="${product.name}" height="250px" width="250px"> -->
+
+        <h2 th:text="${product.name}">test</h2>
+        <p th:text="${product.category.name}">test</p>
+        <h5>重さ: <span th:text="${product.weight}">133</span></h5>
+        <p th:text="${product.description}">232</p>
+        <a href="" th:href="@{/addToCart/{id}(id=${product.id})}">カート</a>
+      </div>
+      
+      </div>
+    
+</body>
+</html>

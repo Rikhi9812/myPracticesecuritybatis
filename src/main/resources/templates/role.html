@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="jp" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>役割管理画面</title>
+    <link rel="stylesheet"  type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+
+    <div class="header">
+        <div>
+            <h1>役割管理画面</h1>
+        </div>
+
+        <div>
+
+            <ul>
+                <li><a th:href="@{/admin}" href="#">管理</a></li>
+                <li><a sec:authorize="isAuthenticated()" th:href="@{/loginout}" href="#">ログアウト</a></li>
+                <li><a href="#" th:href="@{/admin/role}">役割</a></li>
+
+            </ul>
+        </div>
+
+
+    </div>
+
+
+    <div class="mainPage">
+        <h1>役割</h1>
+    </div>
+
+    <div class="table">
+        <form action="" th:action="@{/addRole}" method="post" th:object="${formUserListDTO}">
+
+            <input type="submit" value="全部役割登録・削除">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>名前</th>
+                <th>Enabled</th>
+                <th>役割 管理</th>
+                <th>役割 ユーザー</th>
+                <th>役割 作成</th>
+                <th>役割 読み</th>
+                <th>役割 書き</th>
+            </tr>   
+        </thead>
+        <tbody>
+            <tr th:each="user, stat : ${formUserListDTO.listUser}">
+                <td th:text="${user.getId()}">1</td>
+                <td th:text="${user.getUsername()}">test</td>
+                <td>
+                    <input type="checkbox" 
+                    th:field="*{listUser[__${stat.index}__].enabled}" />
+
+                    <input type="hidden" th:field="*{listUser[__${stat.index}__].id}">
+                     <input type="hidden" th:field="*{listUser[__${stat.index}__].username}">
+                    <!--<input type="hidden" th:field="*{listUser[__${stat.index}__].password}"> -->
+                </td>
+                <td th:each="role, item : ${user.roles}">
+                        <input type="checkbox" 
+                        th:name="|listUser[__${stat.index}__].roles[__${item.index}__].id|"
+                        th:value="${item.index+1}"
+                        th:checked="${role.getId()}"
+                        />
+
+                        <input type="hidden" 
+                        th:name="|listUser[__${stat.index}__].roles[__${item.index}__].rolename|"
+                        th:value="${role.getRolename}"
+                        th:checked="${role.getRolename()}"
+                        />
+                        <!-- <input type="hidden" 
+                        th:checked="${role.id}"
+                        /> -->
+                </td>
+                <!-- <td th:each="role, item : ${user.roles}">
+                        <input type="text" 
+                        th:field="*{listUser[__${stat.index}__].roles[__${item.index}__].rolename}"
+                        />
+
+                        <input type="hidden" 
+                        th:field="*{listUser[__${stat.index}__].roles[__${item.index}__].id}"
+                        />
+                        <input type="hidden" 
+                        th:checked="${role.id}"
+                        /> 
+                </td> -->
+            </tr>
+        </tbody>
+    </table>
+</form>
+</div>
+
+<div class="table">
+
+    <table>
+        <thead>
+            <tr>
+                <th>役割 Id</th>
+                <th>役割 名前</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="role  : ${roles}">
+                <td th:text="${role.id}"></td>
+                <td th:text="${role.rolename}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+    <div class="form">
+    <h1>役割登録</h1>
+    <form action=""  th:action="@{/addrole}" method="post" th:object="${userRole}">
+
+
+        <select name="userid" id="userid" th:field="*{userid}">
+            <option th:each="user : ${users}"
+            th:value="${user.id}"
+            th:text="${user.username}">
+        </option>
+        </select>
+        <select name="userid" id="userid" th:field="*{roleid}">
+            <option th:each="role : ${roles}"
+            th:value="${role.id}"
+            th:text="${role.rolename}">
+        </option>
+        </select>
+        
+        <input type="submit" value="登録">
+
+      </form>
+    </div>
+
+
+    <div class="form">
+      <h1>役割削除</h1>
+    <form action=""  th:action="@{/deleterole}" method="get" th:object="${userRole}">
+
+
+        <select name="userid" id="userid" th:field="*{userid}">
+            <option th:each="user : ${users}"
+            th:value="${user.id}"
+            th:text="${user.username}">
+        </option>
+        </select>
+        <select name="userid" id="userid" th:field="*{roleid}">
+            <option th:each="role : ${roles}"
+            th:value="${role.id}"
+            th:text="${role.rolename}">
+        </option>
+        </select>
+        
+        <input type="submit" value="削除">
+
+      </form>
+    </div>
+
+</body>
+
+</html>

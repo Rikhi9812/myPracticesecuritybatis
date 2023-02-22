@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="jp" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ログイン画面</title>
+    <link rel="stylesheet"  type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+
+</head>
+<body>
+
+    <div class="header">
+        <div>
+          <h1>ログイン画面</h1>
+        </div>
+  
+        <div>
+  
+            <ul>
+                <li><a th:href="@{/}" href="#">ホームベージ</a></li>
+                <li><a th:href="@{/shop}" href="#">ショッピング</a></li>
+                
+              </ul>
+        </div>
+  
+  
+      </div>
+
+
+      <div class="mainPage">
+        <h1>ログイン</h1>
+      </div>
+
+      <div class="form">
+      <form th:action="@{/login}" method="post">
+        <!-- <input type="email" name="email" id="email"> -->
+        <input type="name" name="username" id="username">
+        <input type="password" name="password" id="password">
+        <p th:if="${param.error}"> エラーが発生</p>
+        <input type="submit" value="ログイン"><br>
+        <a href="" th:href="@{/register}">アカウント登録</a>
+        <a href="" th:href="@{/forgotPassword}">パスワード忘れて</a>
+      </form>
+      </div>
+    
+</body>
+</html>
