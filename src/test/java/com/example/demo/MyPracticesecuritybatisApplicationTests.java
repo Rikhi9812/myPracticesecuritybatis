@@ -14,6 +14,13 @@ class MyPracticesecuritybatisApplicationTests {
 						a:snc :as
 							
 	
+							
+							]alskdnva]lks
+							a]lsjdv c:aslkj
+								a:sj vas:km c
+									as;knc v;ask
+										a:ksnc a:sk
+											
 	@Test
 	void contextLoads() {
 	}
@@ -27,5 +34,14 @@ a:ksncv d:askc
 a:slmc v:askmc
 
 */
+	
+	@naspdikvna
+	
+	asjcbva@osjc
+		asjvbasjcb
+		asdjbva@bsd
+		aksjcv a@sjc
+		askjdbva@sdj
+		
 
 }
