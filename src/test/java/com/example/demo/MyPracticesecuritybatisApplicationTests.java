@@ -22,14 +22,7 @@ hello world
 	}
 
 
-	/*
-hello world
-		oajdh:aolsjkbdv
-	asldjvba:lsjdb
-	a;ksndcv a:sd
-	akmn cvas:km c
-*/
-
+	
 
 
 
